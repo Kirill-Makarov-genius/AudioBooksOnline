@@ -14,8 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -35,7 +33,7 @@ public class FileSystemStorageService implements StorageService {
     public FileSystemStorageService(StorageProperties properties){
 
 //  Check blank or not our file upload location
-        if (properties.getLocation().trim().length() == 0){
+        if (properties.getLocation().trim().isEmpty()){
             throw  new StorageException("File upload location can not be Empty");
         }
 
@@ -121,10 +119,6 @@ public class FileSystemStorageService implements StorageService {
         catch (IOException e){
             throw new StorageException("Cound not initialize storage", e);
         }
-    }
-
-    private boolean containsCyrillic(String text){
-        return text != null && text.matches(".*[\\\\u0400-\\\\u04FF].*");
     }
 }
 

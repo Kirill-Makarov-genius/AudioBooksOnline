@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audiobook Store</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Audiobook Store</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#catalog">Catalog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <h2>Featured Books</h2>
+        <div class="book-list">
+            <div class="book-item" th:each="book : ${books}">
+                <img th:src="@{/files/{bookCover}(bookCover=${book.bookCover})}" alt="Book Cover">
+                <h3 th:text="${book.bookName}"></h3>
+                <p th:text="${book.author.name}"></p>
+                <p th:text="${book.bookGenre}"></p>
+                <a th:href="@{'/audio-books/' + ${book.bookName}}" class="btn"></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Audiobook Store</p>
+    </footer>
+</body>
+</html>
+
+
