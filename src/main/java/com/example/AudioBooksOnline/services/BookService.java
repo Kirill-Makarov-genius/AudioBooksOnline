@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class BookService {
 
@@ -20,6 +21,11 @@ public class BookService {
 
     public List<Book> getAllBooks(){
         return bookRepository.findAll();
+    }
+
+    public Book getBookById(Long id){
+        return bookRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Can't find book by this id"));
     }
 
 }
