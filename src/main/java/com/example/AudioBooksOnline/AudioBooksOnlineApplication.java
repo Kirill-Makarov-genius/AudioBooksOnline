@@ -1,6 +1,7 @@
 package com.example.AudioBooksOnline;
 
 import com.example.AudioBooksOnline.config.StorageProperties;
+import com.example.AudioBooksOnline.repositories.AuthorRepository;
 import com.example.AudioBooksOnline.services.interfaces.StorageService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,7 +19,7 @@ public class AudioBooksOnlineApplication {
 
 
 	@Bean
-	CommandLineRunner init(StorageService storageService){
+	CommandLineRunner init(StorageService storageService, AuthorRepository authorRepository){
 		return(args -> {
 			storageService.init();
 		});
