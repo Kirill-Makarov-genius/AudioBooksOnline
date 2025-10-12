@@ -21,15 +21,15 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" th:href="@{/audio-books}">Audiobook Store</a>
+        <a class="navbar-brand" th:href="@{${routes.home}}">Audiobook Store</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link active" th:href="@{/audio-books}">Catalog</a></li>
+                <li class="nav-item"><a class="nav-link active" th:href="@{${routes.home}}">Catalog</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/}">Uploads</a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/audio-books/admin/books/new}">Admin</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{${routes.adminBooks} + '/new'}">Admin</a></li>
             </ul>
         </div>
     </div>
@@ -61,8 +61,8 @@
                     <h6 class="card-subtitle text-muted mb-2" th:text="${book.author != null ? book.author.name : 'Unknown Author'}">Author Name</h6>
                     <p class="card-text text-muted small line-clamp-3" th:text="${book.description}">Short description...</p>
                     <div class="mt-auto d-flex gap-2">
-                        <a class="btn btn-sm btn-outline-secondary" th:if="${book.bookCover != null}" th:href="@{/files/{bookCover}(bookCover=${book.bookCover})}" download>Cover</a>
-                        <a class="btn btn-sm btn-primary ms-auto" th:href="@{'/audio-books/' + ${book.id}}">View</a>
+                        <a class="btn btn-sm btn-outline-secondary" th:if="${book.bookCover != null}" th:href="@{${routes.files + book.bookCover}}" download>Cover</a>
+                        <a class="btn btn-sm btn-primary ms-auto" th:href="@{${routes.books} + ${book.id}}">View</a>
                     </div>
                 </div>
             </div>

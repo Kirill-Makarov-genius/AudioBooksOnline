@@ -45,4 +45,8 @@ public class BookService {
         .orElseThrow(() -> new RuntimeException("Can't find an author by this id"));
     }
 
+    public void storeAuthor(Author author){
+        authorRepository.save(author);
+    }
+
 }

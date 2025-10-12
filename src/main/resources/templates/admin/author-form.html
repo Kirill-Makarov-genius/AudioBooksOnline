@@ -46,7 +46,7 @@
         </button>
         <div class="collapse navbar-collapse" id="adminNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" th:href="@{${routes.home}}">Catalog</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{{routes.home}}">Catalog</a></li>
                 <li class="nav-item"><span class="nav-link active">Admin</span></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/}">Uploads</a></li>
             </ul>
@@ -59,11 +59,11 @@
         <div class="d-flex align-items-center gap-3">
             <span class="badge badge-soft">Add</span>
             <div>
-                <h1 class="h4 mb-1 text-white">Add New Book</h1>
-                <p class="mb-0">Create a new catalog entry and attach an author and genre.</p>
+                <h1 class="h4 mb-1 text-white">Add New Author</h1>
+                <p class="mb-0">Create a new author</p>
             </div>
             <div class="ms-auto">
-                <a class="btn btn-sm btn-outline-light" th:href="@{${routes.adminAuthors + '/new'}}">Add new author</a>
+                <a class="btn btn-sm btn-outline-light" th:href="@{${routes.adminBooks} + '/new'}">Add new book</a>
             </div>
         </div>
     </div>
@@ -74,58 +74,26 @@
         <div class="col-12 col-lg-10 col-xl-8">
             <div class="card">
                 <div class="card-header">
-                    <strong>Book details</strong>
+                    <strong>Author details</strong>
                 </div>
                 <div class="card-body">
-                    <form th:action="@{${routes.adminBooks + action}}" th:object="${book}" method="post"  enctype="multipart/form-data">
-
+                    <form th:action="@{${routes.adminAuthors} + '/new'}" method="post" enctype="multipart/form-data">
                         <div class="mb-3">
-                            <label class="form-label required" for="bookName">Title</label>
-                            <input th:field="*{bookName}" id="bookName" name="bookName" type="text" class="form-control" placeholder="Enter book title" required />
+                            <label class="form-label required" for="authorName">Name</label>
+                            <input id="authorName" name="authorName" type="text" class="form-control" placeholder="Enter author's name" required />
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label required" for="authorId">Author</label>
-                            <select th:field="*{author}" id="authorId" name="authorId" class="form-select" required>
-                                <option value="" selected disabled>Choose an author...</option>
-                                <option th:each="a : ${authors}"
-                                        th:value="${a.id}"
-                                        th:text="${a.name}">Author Name</option>
-                            </select>
-                            <div class="form-text">Author list comes from mutual database.</div>
-                        </div>
 
                         <div class="mb-3">
-                            <label class="form-label required" for="bookGenre">Genre</label>
-                            <select th:field="*{bookGenre}" id="bookGenre" name="bookGenre" class="form-select" required>
-                                <option value="" selected disabled>Choose a genre...</option>
-                                <option th:each="g : ${genres}"
-                                        th:value="${g}"
-                                        th:text="${g}">GENRE</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label" for="description">Description</label>
-                            <textarea th:field="*{description}" id="description" name="description" class="form-control" rows="5" placeholder="Short description of the book..."></textarea>
-                        </div>
-
-                        <div class="divider"></div>
-
-                        <div class="mb-3">
-                            <div th:if="${book.id != null}" >
-                                <label class="form-label">Current Image:</label>
-                                <img th:src="@{${routes.files + book.bookCover}}" class="img-fluid rounded object-fit-cover" style="max-width: 150px; height: auto;" alt="book's cover" >
-                            </div>
-                            <label class="form-label" for="bookCover">New Book Cover</label>
-                            <input id="bookCover" name="bookCoverFile" class="form-control" type="file" accept="image/*" />
+                            <label class="form-label" for="author_image">Book Cover</label>
+                            <input id="author_image" name="author_image" class="form-control" type="file" accept="image/*" />
                             <div class="form-text">
-                                Upload a cover image. Uploaded files are stored and served from /files/{filename}. You can manage files on the Uploads page.
+                                Upload an author's image. Uploaded files are stored and served from /files/{filename}. You can manage files on the Uploads page.
                             </div>
                         </div>
 
                         <div class="d-flex gap-2">
-                            <button class="btn btn-primary" type="submit" th:text="${book.id != null ? 'Save changes' : 'Add book'}"></button>
+                            <button class="btn btn-primary" type="submit">Save Book</button>
                             <a class="btn btn-outline-light" th:href="@{${routes.home}}">Cancel</a>
                         </div>
                     </form>

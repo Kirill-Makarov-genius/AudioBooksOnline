@@ -88,10 +88,10 @@
 </head>
 <body>
 <header>
-    <h1><a th:href="@{/audio-books}" style="text-decoration:none; color:#fff;">Audiobook Store</a></h1>
+    <h1><a th:href="@{${routes.home}}" style="text-decoration:none; color:#fff;">Audiobook Store</a></h1>
     <nav>
         <ul>
-            <li><a th:href="@{/audio-books}">Catalog</a></li>
+            <li><a th:href="@{${routes.home}}">Catalog</a></li>
             <li><a th:href="@{/}">Uploads</a></li>
         </ul>
     </nav>
@@ -103,13 +103,13 @@
 
     <section th:if="${b} != null" class="book-card">
         <div class="cover-wrap">
-            <img class="cover" th:src="@{/files/{cover}(cover=${b.bookCover})}" alt="Book cover">
+            <img class="cover" th:src="@{${routes.files + b.bookCover}}" alt="Book cover">
             <span class="badge" th:text="${b.bookGenre}">GENRE</span>
         </div>
         <div class="meta">
             <h2 th:text="${b.bookName}">Book Title</h2>
             <div class="author">
-                <img th:if="${b.author != null}" th:src="@{/files/{img}(img=${b.author.author_image})}" alt="Author">
+                <img th:if="${b.author != null}" th:src="@{${routes.files + b.author.author_image}}" alt="Author">
                 <div>
                     <div th:text="${b.author != null ? b.author.name : 'Unknown Author'}">Author Name</div>
                 </div>
@@ -118,9 +118,12 @@
             <div class="desc" th:text="${b.description}">Description...</div>
 
             <div class="actions">
-                <a class="btn" th:href="@{/audio-books}">Back to catalog</a>
-                <a class="btn primary" th:href="@{/files/{cover}(cover=${b.bookCover})}" download>
+                <a class="btn" th:href="@{${routes.home}}">Back to catalog</a>
+                <a class="btn primary" th:href="@{${routes.files + b.bookCover}}" download>
                     Download Cover
+                </a>
+                <a class="btn primary" th:href="@{${routes.adminBooks + '/edit/' + b.id}}">
+                    Edit
                 </a>
             </div>
         </div>
@@ -146,7 +149,7 @@
         <div class="empty" th:if="${reviews == null or #lists.isEmpty(reviews)}">No reviews yet.</div>
     </section>
 
-    <a class="back" th:href="@{/audio-books}">← Back to catalog</a>
+    <a class="back" th:href="@{${routes.home}}">← Back to catalog</a>
 </main>
 
 <footer style="margin: 2rem 0; text-align: center; color: #6b7682;">
